@@ -16,6 +16,12 @@ spec:
         - name: auth
           image: ticketing-microservice/auth
           imagePullPolicy: Never
+          env:
+            - name: JWT_KEY
+              valueForm:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
