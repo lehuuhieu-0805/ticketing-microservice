@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { currentUserRouter, signupRouter } from './routes';
 import { errorHandler } from './middlewares/error-handler.middleware';
 import { NotFoundError } from './errors';
 
@@ -7,6 +8,9 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 4001;
+
+app.use(signupRouter);
+app.use(currentUserRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
