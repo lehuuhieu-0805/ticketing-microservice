@@ -1,17 +1,29 @@
 import { scrypt, randomBytes } from 'crypto';
-import { promisify } from 'util';
-
-const scryptAsync = promisify(scrypt);
 
 export class Password {
   static async toHash(password: string) {
-    const salt = randomBytes(8).toString('hex');
-    const buf = scrypt(password, salt, 64) as unknown as Buffer;
-
-    return `${buf.toString('hex').${salt}}`
+    return new Promise((resolve, reject) => {
+      const salt = randomBytes(8).toString('hex');
+      scrypt(password, salt, 64, (error, derivedKey) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(`${derivedKey.toString('hex')}.${salt}`);
+        }
+      });
+    });
   }
 
   static compare(storedPassword: string, suppliedPassword: string) {
-    
+    return new Promise((resolve, reject) => {
+      const [hashedPassword, salt] = storedPassword.split('.');
+      scrypt(suppliedPassword, salt, 64, (error, derivedKey) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(derivedKey.toString('hex') === hashedPassword);
+        }
+      });
+    });
   }
 }
