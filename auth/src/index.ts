@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import { errorHandler } from './middlewares/error-handler.middleware';
 import { NotFoundError } from './errors';
 
@@ -13,6 +14,16 @@ app.all('*', () => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+const start = async () => {
+  try {
+    await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
+  } catch (error) {
+    console.log(error);
+  }
+
+  app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+  });
+};
+
+start();
