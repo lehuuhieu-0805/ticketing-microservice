@@ -1,11 +1,19 @@
+import cookieSession from 'cookie-session';
 import express from 'express';
 import mongoose from 'mongoose';
-import { currentUserRouter, signupRouter } from './routes';
-import { errorHandler } from './middlewares/error-handler.middleware';
 import { NotFoundError } from './errors';
+import { errorHandler } from './middlewares/error-handler.middleware';
+import { currentUserRouter, signupRouter } from './routes';
 
 const app = express();
+app.set('trust proxy', true);
 app.use(express.json());
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 
 const PORT = process.env.PORT || 4001;
 
