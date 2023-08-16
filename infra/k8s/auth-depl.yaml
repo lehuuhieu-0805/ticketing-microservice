@@ -18,10 +18,7 @@ spec:
           imagePullPolicy: Never
           env:
             - name: JWT_KEY
-              valueForm:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+              value: jwt-secret
 ---
 apiVersion: v1
 kind: Service
