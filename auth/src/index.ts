@@ -3,7 +3,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 import { NotFoundError } from './errors';
 import { errorHandler } from './middlewares/error-handler.middleware';
-import { currentUserRouter, signinRouter, signupRouter } from './routes';
+import {
+  currentUserRouter,
+  signinRouter,
+  signupRouter,
+  SignOutRouter,
+} from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -20,6 +25,7 @@ const PORT = process.env.PORT || 4001;
 app.use(signupRouter);
 app.use(currentUserRouter);
 app.use(signinRouter);
+app.use(SignOutRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
