@@ -2,7 +2,7 @@ import cookieSession from 'cookie-session';
 import express from 'express';
 import mongoose from 'mongoose';
 import { NotFoundError } from './errors';
-import { errorHandler } from './middlewares/error-handler.middleware';
+import { errorHandler } from './middlewares';
 import {
   currentUserRouter,
   signinRouter,

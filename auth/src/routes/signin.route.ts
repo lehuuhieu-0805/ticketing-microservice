@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import { BadRequestError } from '../errors';
-import { validateRequest } from '../middlewares/validate-request.middleware';
+import { validateRequest } from '../middlewares';
 import { User } from '../models/user';
 import { Password } from '../services/password.service';
 
