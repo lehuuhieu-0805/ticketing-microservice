@@ -7,7 +7,7 @@ router.get(
   '/api/users/current-user',
   currentUser,
   (req: Request, res: Response) => {
-    res.json(200).json({ currentUser: req.currentUser || null });
+    res.status(200).json({ currentUser: req.currentUser || null });
   }
 );
 
