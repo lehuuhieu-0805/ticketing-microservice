@@ -6,7 +6,7 @@ import {
   currentUserRouter,
   signinRouter,
   signupRouter,
-  SignOutRouter,
+  signOutRouter,
 } from './routes';
 
 const app = express();
@@ -22,7 +22,7 @@ app.use(
 app.use(signupRouter);
 app.use(currentUserRouter);
 app.use(signinRouter);
-app.use(SignOutRouter);
+app.use(signOutRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
