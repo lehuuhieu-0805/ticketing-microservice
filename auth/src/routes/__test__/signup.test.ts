@@ -51,3 +51,15 @@ it('disallows duplicate emails', async () => {
     })
     .expect(400);
 });
+
+it('sets a cookie after successful signup', async () => {
+  const respone = await request(app)
+    .post('/api/users/signup')
+    .send({
+      email: 'test@test.com',
+      password: 'password',
+    })
+    .expect(201);
+
+  expect(respone.get('Set-Cookie')).toBeDefined();
+});
