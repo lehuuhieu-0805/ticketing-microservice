@@ -1,13 +1,12 @@
+import { NotFoundError, errorHandler } from '@hieulh-ticket/common';
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
-import { NotFoundError } from './errors';
-import { errorHandler } from './middlewares';
 import {
   currentUserRouter,
   signinRouter,
-  signupRouter,
   signoutRouter,
+  signupRouter,
 } from './routes';
 
 const app = express();
