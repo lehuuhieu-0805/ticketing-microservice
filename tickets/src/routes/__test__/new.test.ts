@@ -24,8 +24,36 @@ it('returns a status other then 401 if the user is signed in', async () => {
   expect(response.status).not.toEqual(401);
 });
 
-it('return an error if an invalid title is provided', async () => {});
+it('returns an error if an invalid title is provided', async () => {
+  const token = global.signin();
 
-it('returns an error if an invalid price is provided', async () => {});
+  await request(app)
+    .post('/api/tickets')
+    .set('Cookie', token)
+    .send({ title: '', price: 10 })
+    .expect(400);
+
+  await request(app)
+    .post('/api/tickets')
+    .set('Cookie', token)
+    .send({ price: 10 })
+    .expect(400);
+});
+
+it('returns an error if an invalid price is provided', async () => {
+  const token = global.signin();
+
+  await request(app)
+    .post('/api/tickets')
+    .set('Cookie', token)
+    .send({ title: 'testing', price: -10 })
+    .expect(400);
+
+  await request(app)
+    .post('/api/tickets')
+    .set('Cookie', token)
+    .send({ title: 'testing' })
+    .expect(400);
+});
 
 it('creates a ticket with valid inputs', async () => {});
