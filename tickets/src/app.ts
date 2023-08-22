@@ -1,4 +1,8 @@
-import { NotFoundError, errorHandler } from '@hieulh-ticket/common';
+import {
+  NotFoundError,
+  currentUser,
+  errorHandler,
+} from '@hieulh-ticket/common';
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
@@ -13,6 +17,8 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
+
+app.use(currentUser);
 
 app.use(createTicketRouter);
 
