@@ -16,6 +16,11 @@ spec:
         - name: auth
           image: ticketing-microservice/auth
           imagePullPolicy: Never
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://auth-mongo-srv:27017/auth'
+            - name: JWT_KEY
+              value: jwt-secret
 ---
 apiVersion: v1
 kind: Service

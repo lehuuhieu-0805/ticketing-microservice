@@ -12,6 +12,14 @@ build:
         manual:
           - dest: .
             src: "src/**/*.ts"
+    - image: ticketing-microservice/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
 deploy:
   kubectl: {}
 manifests:
