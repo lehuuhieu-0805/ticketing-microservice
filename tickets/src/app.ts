@@ -6,8 +6,7 @@ import {
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
-import { createTicketRouter, showTicketRouter } from './routes';
-import { updateTicketRouter } from './routes/update.route';
+import { createTicketRouter, showTicketRouter, updateTicketRouter } from './routes';
 
 const app = express();
 app.set('trust proxy', true);
