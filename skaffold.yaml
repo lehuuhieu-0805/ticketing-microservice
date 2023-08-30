@@ -20,6 +20,14 @@ build:
         manual:
           - dest: .
             src: "src/**/*.ts"
+    - image: ticketing-microservice/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "src/**/*.ts"
 deploy:
   kubectl: {}
 manifests:
