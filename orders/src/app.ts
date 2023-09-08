@@ -6,6 +6,11 @@ import {
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
+import {
+  createOrderRouter,
+  deleteOrderRouter,
+  showOrderRouter,
+} from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,6 +23,10 @@ app.use(
 );
 
 app.use(currentUser);
+
+app.use(createOrderRouter);
+app.use(showOrderRouter);
+app.use(deleteOrderRouter);
 
 app.all('*', () => {
   throw new NotFoundError();
